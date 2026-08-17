@@ -173,18 +173,73 @@
   }
   .assoc-section a.link { color: #8a6d2f; border-bottom: 1px solid #8a6d2f; }
 
+  /* FOOTER. Church name, social links, and a small contact card.
+     This same block (CSS + HTML) is copied identically onto all
+     four pages so the footer looks the same site-wide. To add or
+     remove a social link, copy/edit one of the <a> tags inside
+     .footer-social in the footer HTML further down this file. */
   footer {
-    text-align: center;
-    padding: 40px 20px;
-    font-size: 13px;
-    letter-spacing: 1px;
-    color: rgba(242,237,225,0.55);
+    padding: 50px 20px 36px;
     border-top: 1px solid var(--line);
     background: var(--black);
   }
-  footer .contact { margin-top: 10px; font-size: 12px; color: rgba(242,237,225,0.4); }
-  footer a { border-bottom: 1px solid transparent; }
-  footer a:hover { border-bottom-color: var(--gold); color: var(--gold-soft); }
+  .footer-inner {
+    max-width: 480px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 14px;
+  }
+  .footer-brand {
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(242,237,225,0.7);
+  }
+  .footer-location {
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: rgba(242,237,225,0.4);
+    margin-top: -8px;
+  }
+  .footer-social { display: flex; gap: 16px; }
+  .footer-social a {
+    width: 34px; height: 34px;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gold);
+    font-size: 14px;
+    transition: all .2s ease;
+  }
+  .footer-social a:hover { background: var(--gold); color: var(--black); border-color: var(--gold); }
+  .footer-contact-card {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px 28px;
+    width: 100%;
+    padding: 16px 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .footer-contact-card a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: rgba(242,237,225,0.75);
+  }
+  .footer-contact-card a:hover { color: var(--gold-soft); }
+  .footer-contact-card i { color: var(--gold); width: 14px; text-align: center; }
+  .footer-copyright {
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: rgba(242,237,225,0.35);
+  }
 
   @media (max-width: 700px) {
     nav { gap: 20px; flex-wrap: wrap; }
@@ -338,10 +393,23 @@
 </section>
 
 <!-- ============ FOOTER ============ -->
+<!-- Church name/location, social links, and a small contact card.
+     To add a social link, copy one of the <a> tags inside
+     .footer-social and change the href and icon class.
+     To change the email or phone, edit them inside .footer-contact-card. -->
 <footer>
-  Grace Reformed Baptist Church &nbsp;·&nbsp; Quartz Hill, California &nbsp;·&nbsp; © 2026
-  <div class="contact">
-    <a href="mailto:rb@rbap.net">rb@rbap.net</a> &nbsp;·&nbsp; 661-609-3450
+  <div class="footer-inner">
+    <div class="footer-brand">Grace Reformed Baptist Church</div>
+    <div class="footer-location">Quartz Hill, California</div>
+    <div class="footer-social">
+      <a href="https://facebook.com/grbcav" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+      <a href="https://x.com/GRBCAV" target="_blank" rel="noopener" aria-label="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
+    </div>
+    <div class="footer-contact-card">
+      <a href="mailto:rb@rbap.net"><i class="fa-solid fa-envelope"></i> rb@rbap.net</a>
+      <a href="tel:+16616093450"><i class="fa-solid fa-phone"></i> 661-609-3450</a>
+    </div>
+    <div class="footer-copyright">&copy; 2026 Grace Reformed Baptist Church</div>
   </div>
 </footer>
 
