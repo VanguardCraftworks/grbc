@@ -286,6 +286,58 @@
     .services-box { border-left: none; border-top: 1px solid #c9a84c; padding-left: 0; padding-top: 30px; }
     .assoc-grid { grid-template-columns: 1fr; }
   }
+
+  /* ============ HAMBURGER MENU (mobile) ============ */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    cursor: pointer;
+    padding: 6px;
+    background: none;
+    border: none;
+    z-index: 300;
+  }
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--gold);
+    transition: all 0.3s;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: rgba(28,19,13,0.98);
+    border-bottom: 1px solid var(--line);
+    z-index: 250;
+    padding: 5rem 2rem 2rem;
+    flex-direction: column;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-nav-item {
+    font-family: 'Cinzel', serif;
+    font-size: 15px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #f2ede1;
+    text-decoration: none;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .mobile-nav-item:last-child { border-bottom: none; }
+  .mobile-nav-item.active, .mobile-nav-item:hover { color: var(--gold-soft); }
+
+  @media (max-width: 700px) {
+    nav { display: none; }
+    .hamburger { display: flex; }
+  }
 </style>
 </head>
 <body>
@@ -296,20 +348,31 @@
        To use the real crest image instead, replace the two lines below with:
        <img src="grbc-logo.png" style="height: 45px;">
        (keep the .name div below it if you still want the text next to it) -->
-  <div class="crest-mini">
+  <a href="index.html" style="text-decoration:none;"><div class="crest-mini">
     <div class="glyph">GR<br>BC</div>
     <div class="name">GRACE REFORMED<br>BAPTIST CHURCH</div>
-  </div>
+  </div></a>
   <!-- TOP NAVIGATION LINKS. Each line below is one menu item.
        The text between > and < is what shows on screen.
        The part in quotes after href= is which page it links to. -->
   <nav>
-    <a href="#" class="active">Home</a>
+    <a href="index.html" class="active">Home</a>
     <a href="about.html">About</a>
     <a href="what-we-believe.html">What We Believe</a>
     <a href="sermons.html">Sermons</a>
   </nav>
+  <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMobileMenu()">
+    <span></span><span></span><span></span>
+  </button>
 </header>
+
+<div class="mobile-menu" id="mobile-menu">
+  <a href="index.html" class="mobile-nav-item active">Home</a>
+  <a href="about.html" class="mobile-nav-item">About</a>
+  <a href="what-we-believe.html" class="mobile-nav-item">What We Believe</a>
+  <a href="sermons.html" class="mobile-nav-item">Sermons</a>
+</div>
+
 
 <!-- ============ HERO SECTION (welcome headline + buttons) ============ -->
 <section class="hero">
@@ -412,5 +475,12 @@
   Grace Reformed Baptist Church &nbsp;·&nbsp; Quartz Hill, California &nbsp;·&nbsp; © 2026
 </footer>
 
+
+<script>
+  function toggleMobileMenu() {
+    document.getElementById('hamburger').classList.toggle('open');
+    document.getElementById('mobile-menu').classList.toggle('open');
+  }
+</script>
 </body>
 </html>
