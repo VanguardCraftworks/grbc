@@ -450,7 +450,11 @@
       <div class="label-dark">SUNDAY WORSHIP SERVICES</div>
       <div class="service-line"><i class="fa-solid fa-clock"></i> 11:00 AM — Morning Worship</div>
       <div class="service-line"><i class="fa-solid fa-clock"></i> 1:30 PM (Approx.) — Afternoon Worship</div>
-      <div class="service-line"><i class="fa-solid fa-location-dot"></i> 42217 55th Street W, Quartz Hill, CA 93536</div>
+      <!-- ADDRESS LINK: this automatically opens Apple Maps on iPhones and
+           Google Maps everywhere else. See the small script near the bottom
+           of this file (search "mapsLink") if the address ever needs to
+           change — update the text in both places. -->
+      <div class="service-line"><i class="fa-solid fa-location-dot"></i> <a id="mapsLink" href="https://www.google.com/maps/search/?api=1&query=42217+55th+Street+W%2C+Quartz+Hill%2C+CA+93536" target="_blank" style="color:inherit; border-bottom:1px dotted currentColor;">42217 55th Street W, Quartz Hill, CA 93536</a></div>
     </div>
   </div>
 </section>
@@ -496,6 +500,16 @@
     document.getElementById('hamburger').classList.toggle('open');
     document.getElementById('mobile-menu').classList.toggle('open');
   }
+</script>
+<!-- Sends iPhone/iPad visitors to Apple Maps, everyone else to Google Maps -->
+<script>
+  (function() {
+    var isAppleDevice = /iPhone|iPad|iPod|Macintosh/.test(navigator.userAgent) && 'ontouchend' in document || /iPhone|iPad|iPod/.test(navigator.userAgent);
+    var link = document.getElementById('mapsLink');
+    if (link && isAppleDevice) {
+      link.href = "https://maps.apple.com/?address=42217+55th+Street+W,+Quartz+Hill,+CA+93536";
+    }
+  })();
 </script>
 </body>
 </html>
