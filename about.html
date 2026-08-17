@@ -1,0 +1,286 @@
+<!--
+  ============================================================
+  GRACE REFORMED BAPTIST CHURCH — ABOUT PAGE
+  ============================================================
+  See index.html (the homepage) for the full plain-language
+  editing guide — the same rules apply here. Quick reference:
+
+  1. Change the "Our Church" intro text
+     -> Search for "OUR CHURCH INTRO" below
+
+  2. Change the pastor's bio or photo
+     -> Search for "LEADERSHIP" below. Photo file is "Pastor.jpg" —
+        it must sit in the same folder as this HTML file.
+
+  3. Change the Association text
+     -> Search for "OUR ASSOCIATION" below
+
+  4. Colors, fonts, and layout are shared with the homepage via
+     the same <style> rules below (kept identical on purpose so
+     every page of the site looks and feels the same).
+  ============================================================
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About - Grace Reformed Baptist Church</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  /* COLORS. Every color on the page is defined once here, then used
+     everywhere else by name (like var(--gold)). Change a value here
+     and it updates across the entire page automatically. Keep this
+     block identical to index.html so all pages match. */
+  :root {
+    --black: #1c130d;
+    --black-2: #241a12;
+    --gold: #c9a84c;
+    --gold-soft: #e2c98a;
+    --ivory: #f2ede1;
+    --line: rgba(201,168,76,0.35);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--black);
+    color: var(--ivory);
+    font-family: 'EB Garamond', Georgia, serif;
+    line-height: 1.6;
+  }
+  a { color: inherit; text-decoration: none; }
+  h1, h2, h3, .display { font-family: 'Cinzel', serif; letter-spacing: 1px; }
+
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px 6%;
+    border-bottom: 1px solid var(--line);
+  }
+  .crest-mini { display: flex; align-items: center; gap: 12px; }
+  .crest-mini .glyph {
+    width: 40px; height: 40px;
+    border: 1.5px solid var(--gold);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gold);
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .crest-mini .name {
+    font-family: 'Cinzel', serif;
+    font-size: 14px;
+    letter-spacing: 2px;
+    color: var(--gold-soft);
+  }
+  nav { display: flex; gap: 40px; font-size: 14px; letter-spacing: 1.5px; text-transform: uppercase; }
+  nav a { color: var(--ivory); border-bottom: 1px solid transparent; padding-bottom: 4px; }
+  nav a.active, nav a:hover { border-bottom-color: var(--gold); color: var(--gold-soft); }
+
+  .page-hero {
+    text-align: center;
+    padding: 80px 6% 50px;
+  }
+  .page-hero .eyebrow {
+    letter-spacing: 4px;
+    font-size: 12px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 18px;
+  }
+  .page-hero h1 {
+    font-size: clamp(28px, 4.5vw, 46px);
+    font-weight: 500;
+    color: var(--gold-soft);
+    margin: 0 0 24px;
+  }
+  .page-hero p {
+    max-width: 700px;
+    margin: 0 auto;
+    font-size: 18px;
+    color: rgba(242,237,225,0.85);
+  }
+
+  .horizon {
+    max-width: 200px;
+    margin: 60px auto;
+    border: none;
+    border-top: 1px solid var(--gold);
+    opacity: 0.5;
+  }
+
+  .leadership {
+    display: flex;
+    gap: 50px;
+    align-items: center;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 6% 90px;
+  }
+  .leadership img {
+    width: 220px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid var(--gold);
+    flex-shrink: 0;
+  }
+  .leadership .label {
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+  .leadership h2 {
+    font-size: 26px;
+    color: var(--gold-soft);
+    font-weight: 500;
+    margin: 0 0 14px;
+  }
+  .leadership p { font-size: 16px; color: rgba(242,237,225,0.85); margin: 0; }
+
+  .assoc-section {
+    background: var(--ivory);
+    color: var(--black-2);
+    padding: 90px 6%;
+  }
+  .assoc-section .inner { max-width: 800px; margin: 0 auto; }
+  .assoc-section .label-dark {
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: #8a6d2f;
+    margin-bottom: 10px;
+  }
+  .assoc-section h2 {
+    font-size: 30px;
+    color: var(--black-2);
+    margin: 0 0 24px;
+    font-weight: 500;
+  }
+  .assoc-section p { font-size: 17px; margin: 0 0 20px; color: #2a241a; }
+  .assoc-section .quote {
+    font-style: italic;
+    border-left: 3px solid var(--gold);
+    padding-left: 24px;
+    margin: 28px 0;
+    color: #4a3f2c;
+  }
+  .assoc-section a.link { color: #8a6d2f; border-bottom: 1px solid #8a6d2f; }
+
+  footer {
+    text-align: center;
+    padding: 40px 20px;
+    font-size: 13px;
+    letter-spacing: 1px;
+    color: rgba(242,237,225,0.55);
+    border-top: 1px solid var(--line);
+    background: var(--black);
+  }
+  footer .contact { margin-top: 10px; font-size: 12px; color: rgba(242,237,225,0.4); }
+  footer a { border-bottom: 1px solid transparent; }
+  footer a:hover { border-bottom-color: var(--gold); color: var(--gold-soft); }
+
+  @media (max-width: 700px) {
+    nav { gap: 20px; flex-wrap: wrap; }
+    .leadership { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER / LOGO / TOP NAVIGATION ============ -->
+<header>
+  <!-- LOGO (small header version) — same placeholder as index.html.
+       Swap for the real crest image the same way you did on index.html. -->
+  <div class="crest-mini">
+    <div class="glyph">GR<br>BC</div>
+    <div class="name">GRACE REFORMED<br>BAPTIST CHURCH</div>
+  </div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html" class="active">About</a>
+    <a href="what-we-believe.html">What We Believe</a>
+    <a href="sermons.html">Sermons</a>
+  </nav>
+</header>
+
+<!-- ============ OUR CHURCH INTRO ============ -->
+<section class="page-hero">
+  <div class="eyebrow">About Grace Reformed Baptist Church</div>
+  <h1>Our Church</h1>
+  <p>
+    We are a group of believers in Christ in the growing Antelope Valley. Our aim is to give glory to the
+    Triune God in public worship, to proclaim the gospel of Jesus Christ, and to teach those who profess
+    faith to observe all that Christ has commanded.
+  </p>
+</section>
+
+<hr class="horizon">
+
+<!-- ============ LEADERSHIP (pastor photo + bio) ============ -->
+<!-- To change the photo, replace "Pastor.jpg" below with a different
+     filename — just make sure that image file is uploaded to the same
+     folder as this HTML page. -->
+<section class="leadership">
+  <img src="Pastor.jpg" alt="Pastor Richard Barcellos">
+  <div>
+    <div class="label">Pastor</div>
+    <h2>Richard C. Barcellos, Ph.D.</h2>
+    <p>
+      Richard C. Barcellos is pastor of Grace Reformed Baptist Church. He also serves as Associate
+      Professor of Exegetical Theology at International Reformed Baptist Seminary (IRBS). He is author
+      of <em>Trinity &amp; Creation: A Scriptural and Confessional Account</em> and
+      <em>Getting the Garden Right: Adam's Work and God's Rest in Light of Christ</em>. He is also the
+      Managing Editor and Book Review Editor for the Journal of IRBS.
+    </p>
+  </div>
+</section>
+
+<!-- ============ OUR ASSOCIATION (SCARBC) ============ -->
+<section class="assoc-section">
+  <div class="inner">
+    <div class="label-dark">Our Association</div>
+    <h2>SCARBC</h2>
+    <p>
+      Grace Reformed Baptist Church is a part of the Southern California Association of Reformed
+      Baptist Churches (SCARBC).
+    </p>
+    <div class="quote">
+      The Constitution of the SCARBC states: "An Association consists of particular churches who have
+      agreed to associate together at stated times, to obey the Word of God, to promote their own
+      interests and the good of common causes found among them."
+    </div>
+    <p>
+      The association holds tenaciously to the inerrant and infallible Word of God as found in the 66
+      books of the Old and New Testaments in the Holy Bible (this being our only source of faith and
+      practice), and embraces and adopts the London Baptist Confession of Faith of 1689 as the most
+      accurate expression of that system of doctrine taught in the Bible. That Confession is the
+      doctrinal statement and position (Strict Subscription) of the Association.
+    </p>
+    <p>
+      The association holds combined Sunday Evening Worship Services at various locations three to four
+      times a year. We also work together on various projects and seek to strengthen one another in the
+      most holy faith.
+    </p>
+    <p>
+      To learn more about the SCARBC, please visit <a class="link" href="https://scarbc.org" target="_blank">scarbc.org</a>.
+    </p>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  Grace Reformed Baptist Church &nbsp;·&nbsp; Quartz Hill, California &nbsp;·&nbsp; © 2026
+  <div class="contact">
+    <a href="mailto:rb@rbap.net">rb@rbap.net</a> &nbsp;·&nbsp; 661-609-3450
+  </div>
+</footer>
+
+</body>
+</html>
