@@ -1,0 +1,219 @@
+<!--
+  ============================================================
+  GRACE REFORMED BAPTIST CHURCH — WHAT WE BELIEVE (READER)
+  ============================================================
+  This page displays the Second London Baptist Confession of
+  Faith (1689) one chapter at a time, like a book, with
+  Previous/Next navigation and a chapter dropdown.
+
+  IMPORTANT: This page needs a second file to work —
+  "confession-data.js" — which contains the actual confession
+  text. That file must be uploaded to the SAME folder as this
+  HTML file (same place as index.html, about.html, etc).
+  This page is just the reader/display logic; the words of
+  the confession live in that separate file so both stay easy
+  to manage on their own.
+  ============================================================
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What We Believe - Grace Reformed Baptist Church</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #1c130d;
+    --gold: #c9a84c;
+    --gold-soft: #e2c98a;
+    --line: rgba(201,168,76,0.35);
+    --paper: #faf7f0;
+    --ink: #2a241a;
+    --ink-soft: #5a4f3c;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--black); color: #f2ede1; font-family: 'EB Garamond', Georgia, serif; line-height: 1.6; }
+  a { color: inherit; text-decoration: none; }
+  h1, h2, h3 { font-family: 'Cinzel', serif; letter-spacing: 1px; }
+
+  header { display: flex; align-items: center; justify-content: space-between; padding: 22px 6%; border-bottom: 1px solid var(--line); }
+  .crest-mini { display: flex; align-items: center; gap: 12px; }
+  .crest-mini .glyph { width: 40px; height: 40px; border: 1.5px solid var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--gold); font-family: 'Cinzel', serif; font-weight: 700; font-size: 14px; }
+  .crest-mini .name { font-family: 'Cinzel', serif; font-size: 14px; letter-spacing: 2px; color: var(--gold-soft); }
+  nav { display: flex; gap: 40px; font-size: 14px; letter-spacing: 1.5px; text-transform: uppercase; }
+  nav a { color: #f2ede1; border-bottom: 1px solid transparent; padding-bottom: 4px; }
+  nav a.active, nav a:hover { border-bottom-color: var(--gold); color: var(--gold-soft); }
+
+  .page-hero { text-align: center; padding: 70px 6% 40px; }
+  .page-hero .eyebrow { letter-spacing: 4px; font-size: 12px; text-transform: uppercase; color: var(--gold); margin-bottom: 18px; }
+  .page-hero h1 { font-size: clamp(26px, 4vw, 42px); font-weight: 500; color: var(--gold-soft); margin: 0 0 20px; }
+  .page-hero p { max-width: 680px; margin: 0 auto; font-size: 17px; color: rgba(242,237,225,0.85); }
+
+  .reader-shell { background: var(--paper); color: var(--ink); padding: 50px 6% 90px; }
+  .reader-inner { max-width: 720px; margin: 0 auto; }
+  .reader-controls { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 40px; flex-wrap: wrap; }
+  .chapter-select { font-family: 'EB Garamond', serif; font-size: 15px; padding: 8px 14px; border: 1px solid #c9b98a; background: #fff; color: var(--ink); border-radius: 3px; max-width: 100%; }
+  .nav-btn { font-family: 'Cinzel', serif; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; padding: 10px 20px; border: 1px solid #8a6d2f; color: #8a6d2f; background: transparent; cursor: pointer; border-radius: 3px; }
+  .nav-btn:hover { background: #8a6d2f; color: #fff; }
+  .nav-btn:disabled { opacity: 0.3; cursor: default; }
+  .nav-btn:disabled:hover { background: transparent; color: #8a6d2f; }
+  .chapter-progress { text-align: center; font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 2px; color: #a8935f; text-transform: uppercase; margin-bottom: 30px; }
+  .chapter-title { font-family: 'Cormorant Garamond', 'EB Garamond', serif; font-size: clamp(28px, 4vw, 40px); font-weight: 600; text-align: center; margin: 0 0 8px; color: var(--ink); }
+  .chapter-num-label { text-align: center; font-family: 'Cinzel', serif; font-size: 13px; letter-spacing: 3px; color: #a8935f; text-transform: uppercase; margin-bottom: 40px; }
+  .confession-para { font-size: 19px; margin-bottom: 26px; }
+  .confession-para .pnum { font-family: 'Cinzel', serif; font-weight: 700; font-size: 14px; color: #a8935f; margin-right: 4px; }
+  .confession-para .refs { display: block; font-family: 'EB Garamond', serif; font-style: italic; font-size: 14px; color: var(--ink-soft); margin-top: 6px; }
+  .bottom-nav { display: flex; justify-content: space-between; margin-top: 60px; padding-top: 30px; border-top: 1px solid #d8cba4; }
+  .loading-msg { text-align: center; padding: 60px 0; color: #a8935f; font-family: 'Cinzel', serif; letter-spacing: 1px; }
+  .error-msg { text-align: center; padding: 60px 20px; color: #a03030; font-size: 16px; max-width: 500px; margin: 0 auto; }
+
+  footer { text-align: center; padding: 40px 20px; font-size: 13px; letter-spacing: 1px; color: rgba(242,237,225,0.55); border-top: 1px solid var(--line); background: var(--black); }
+  footer .contact { margin-top: 10px; font-size: 12px; color: rgba(242,237,225,0.4); }
+
+  @media (max-width: 700px) {
+    nav { gap: 20px; flex-wrap: wrap; }
+    .reader-controls { justify-content: center; }
+    .bottom-nav { flex-direction: column; gap: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER / LOGO / TOP NAVIGATION ============ -->
+<header>
+  <div class="crest-mini">
+    <div class="glyph">GR<br>BC</div>
+    <div class="name">GRACE REFORMED<br>BAPTIST CHURCH</div>
+  </div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="what-we-believe.html" class="active">What We Believe</a>
+    <a href="sermons.html">Sermons</a>
+  </nav>
+</header>
+
+<!-- ============ INTRO ============ -->
+<section class="page-hero">
+  <div class="eyebrow">What We Believe</div>
+  <h1>The Second London Baptist Confession of Faith</h1>
+  <p>
+    We believe the Bible is the inspired, inerrant, and authoritative Word of God, and the sole
+    basis for any statement of faith. We adopt the Second London Baptist Confession of Faith of
+    1689 as a faithful and historic expression of that faith &mdash; not as a rival to Scripture,
+    but as an assistance in controversy and a confirmation in belief. Use the navigation below to
+    read through its thirty-two chapters.
+  </p>
+</section>
+
+<!-- ============ READER (one chapter at a time) ============ -->
+<section class="reader-shell">
+  <div class="reader-inner" id="readerInner">
+    <div class="loading-msg">Loading the confession&hellip;</div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  Grace Reformed Baptist Church &nbsp;&middot;&nbsp; Quartz Hill, California &nbsp;&middot;&nbsp; &copy; 2026
+  <div class="contact">
+    <a href="mailto:rb@rbap.net">rb@rbap.net</a> &nbsp;&middot;&nbsp; 661-609-3450
+  </div>
+</footer>
+
+<!-- ============ READER LOGIC ============ -->
+<!-- This loads confession-data.js, which must sit in the same
+     folder as this page. That file just defines one variable
+     called "confession" — a list of all 32 chapters. -->
+<script src="confession-data.js"></script>
+<script>
+  var currentChapter = 0;
+
+  function buildReader() {
+    var inner = document.getElementById('readerInner');
+
+    if (typeof confession === 'undefined' || !confession.length) {
+      inner.innerHTML = '<div class="error-msg">The confession text could not be loaded. '
+        + 'Make sure the file "confession-data.js" is uploaded to the same folder as this page.</div>';
+      return;
+    }
+
+    inner.innerHTML =
+      '<div class="reader-controls">' +
+        '<button class="nav-btn" id="prevBtn" onclick="goPrev()">&larr; Previous</button>' +
+        '<select class="chapter-select" id="chapterSelect" onchange="jumpTo(this.value)"></select>' +
+        '<button class="nav-btn" id="nextBtn" onclick="goNext()">Next &rarr;</button>' +
+      '</div>' +
+      '<div class="chapter-progress" id="progressLabel"></div>' +
+      '<div class="chapter-num-label" id="chapterNumLabel"></div>' +
+      '<h2 class="chapter-title" id="chapterTitle"></h2>' +
+      '<div id="paragraphContainer"></div>' +
+      '<div class="bottom-nav">' +
+        '<button class="nav-btn" onclick="goPrev()">&larr; Previous Chapter</button>' +
+        '<button class="nav-btn" onclick="goNext()">Next Chapter &rarr;</button>' +
+      '</div>';
+
+    var select = document.getElementById('chapterSelect');
+    confession.forEach(function(ch, i) {
+      var opt = document.createElement('option');
+      opt.value = i;
+      opt.textContent = 'Chapter ' + ch.num + ' — ' + ch.title;
+      select.appendChild(opt);
+    });
+
+    var hash = window.location.hash.replace('#ch', '');
+    var startIndex = 0;
+    if (hash) {
+      var idx = confession.findIndex(function(ch) { return String(ch.num) === hash; });
+      if (idx >= 0) startIndex = idx;
+    }
+
+    renderChapter(startIndex);
+  }
+
+  function renderChapter(index) {
+    currentChapter = index;
+    var ch = confession[index];
+
+    document.getElementById('chapterSelect').value = index;
+    document.getElementById('progressLabel').textContent = 'Chapter ' + (index + 1) + ' of ' + confession.length;
+    document.getElementById('chapterNumLabel').textContent = 'Chapter ' + ch.num;
+    document.getElementById('chapterTitle').textContent = ch.title;
+
+    var container = document.getElementById('paragraphContainer');
+    container.innerHTML = '';
+    ch.paragraphs.forEach(function(p) {
+      var div = document.createElement('div');
+      div.className = 'confession-para';
+      var html = '';
+      if (p.num) {
+        html += '<span class="pnum">' + p.num + '.</span> ';
+      }
+      html += p.text;
+      if (p.refs) {
+        html += '<span class="refs">' + p.refs + '</span>';
+      }
+      div.innerHTML = html;
+      container.appendChild(div);
+    });
+
+    document.querySelectorAll('.nav-btn').forEach(function(btn) {
+      if (btn.id === 'prevBtn') btn.disabled = (index === 0);
+      if (btn.id === 'nextBtn') btn.disabled = (index === confession.length - 1);
+    });
+
+    history.replaceState(null, '', '#ch' + ch.num);
+    document.querySelector('.reader-shell').scrollIntoView({ behavior: 'instant', block: 'start' });
+  }
+
+  function goPrev() { if (currentChapter > 0) renderChapter(currentChapter - 1); }
+  function goNext() { if (currentChapter < confession.length - 1) renderChapter(currentChapter + 1); }
+  function jumpTo(index) { renderChapter(parseInt(index, 10)); }
+
+  buildReader();
+</script>
+
+</body>
+</html>

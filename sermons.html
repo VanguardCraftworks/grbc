@@ -1,0 +1,111 @@
+<!--
+  ============================================================
+  GRACE REFORMED BAPTIST CHURCH — SERMONS PAGE
+  ============================================================
+  This page embeds SermonAudio's own "sermon browser" widget —
+  a full, searchable, auto-updating archive of every sermon
+  GRBC has ever posted. This is intentional: it means nobody
+  ever has to manually add a new sermon to this page. When a
+  new sermon goes up on SermonAudio, it just appears here
+  automatically.
+
+  If the dark-theme look ever needs adjusting, or the widget
+  needs resizing, search for "embed.sermonaudio.com" below —
+  that line controls the whole embed.
+  ============================================================
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sermons - Grace Reformed Baptist Church</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #1c130d;
+    --gold: #c9a84c;
+    --gold-soft: #e2c98a;
+    --line: rgba(201,168,76,0.35);
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--black); color: #f2ede1; font-family: 'EB Garamond', Georgia, serif; line-height: 1.6; }
+  a { color: inherit; text-decoration: none; }
+  h1, h2 { font-family: 'Cinzel', serif; letter-spacing: 1px; }
+
+  header { display: flex; align-items: center; justify-content: space-between; padding: 22px 6%; border-bottom: 1px solid var(--line); }
+  .crest-mini { display: flex; align-items: center; gap: 12px; }
+  .crest-mini .glyph { width: 40px; height: 40px; border: 1.5px solid var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--gold); font-family: 'Cinzel', serif; font-weight: 700; font-size: 14px; }
+  .crest-mini .name { font-family: 'Cinzel', serif; font-size: 14px; letter-spacing: 2px; color: var(--gold-soft); }
+  nav { display: flex; gap: 40px; font-size: 14px; letter-spacing: 1.5px; text-transform: uppercase; }
+  nav a { color: #f2ede1; border-bottom: 1px solid transparent; padding-bottom: 4px; }
+  nav a.active, nav a:hover { border-bottom-color: var(--gold); color: var(--gold-soft); }
+
+  .page-hero { text-align: center; padding: 70px 6% 40px; }
+  .page-hero .eyebrow { letter-spacing: 4px; font-size: 12px; text-transform: uppercase; color: var(--gold); margin-bottom: 18px; }
+  .page-hero h1 { font-size: clamp(26px, 4vw, 42px); font-weight: 500; color: var(--gold-soft); margin: 0 0 20px; }
+  .page-hero p { max-width: 640px; margin: 0 auto; font-size: 17px; color: rgba(242,237,225,0.85); }
+
+  .browser-section { padding: 0 6% 90px; }
+  .browser-wrap { max-width: 900px; margin: 0 auto; }
+  .browser-wrap iframe { width: 100%; min-height: 700px; border: 1px solid var(--line); border-radius: 4px; }
+
+  footer { text-align: center; padding: 40px 20px; font-size: 13px; letter-spacing: 1px; color: rgba(242,237,225,0.55); border-top: 1px solid var(--line); }
+  footer .contact { margin-top: 10px; font-size: 12px; color: rgba(242,237,225,0.4); }
+
+  @media (max-width: 700px) {
+    nav { gap: 20px; flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER / LOGO / TOP NAVIGATION ============ -->
+<header>
+  <div class="crest-mini">
+    <div class="glyph">GR<br>BC</div>
+    <div class="name">GRACE REFORMED<br>BAPTIST CHURCH</div>
+  </div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="what-we-believe.html">What We Believe</a>
+    <a href="sermons.html" class="active">Sermons</a>
+  </nav>
+</header>
+
+<!-- ============ INTRO ============ -->
+<section class="page-hero">
+  <div class="eyebrow">Sermons</div>
+  <h1>Listen &amp; Learn</h1>
+  <p>
+    Browse, search, and listen to sermons preached at Grace Reformed Baptist Church. This archive
+    updates automatically as new sermons are posted &mdash; nothing here needs to be maintained by hand.
+  </p>
+</section>
+
+<!-- ============ SERMON ARCHIVE (auto-updating, no editing needed) ============ -->
+<!-- This iframe pulls GRBC's full sermon archive live from SermonAudio.com.
+     It will always show the newest sermons automatically. Do not edit the
+     link inside src=" unless the church's SermonAudio broadcaster ID ever
+     changes (currently "grbc1689"). -->
+<section class="browser-section">
+  <div class="browser-wrap">
+    <iframe
+      src="https://embed.sermonaudio.com/browser/broadcaster/grbc1689/?sort=newest&page_size=15&theme=dark"
+      allow="autoplay"
+      scrolling="no">
+    </iframe>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  Grace Reformed Baptist Church &nbsp;&middot;&nbsp; Quartz Hill, California &nbsp;&middot;&nbsp; &copy; 2026
+  <div class="contact">
+    <a href="mailto:rb@rbap.net">rb@rbap.net</a> &nbsp;&middot;&nbsp; 661-609-3450
+  </div>
+</footer>
+
+</body>
+</html>
