@@ -1,0 +1,416 @@
+<!--
+  ============================================================
+  GRACE REFORMED BAPTIST CHURCH — HOMEPAGE
+  ============================================================
+  This is a plain HTML file. No WordPress, no dashboard, no
+  login required to edit it. Open this file in any text editor
+  (Notepad, TextEdit, VS Code, etc.), make your change, save,
+  and re-upload it to the website host. That's the whole process.
+
+  HOW THIS FILE IS ORGANIZED
+  Scroll down through the <body> section (search for <body> if
+  your editor has a search function). Each section of the page
+  is marked with a comment like this one, telling you what it is.
+  Comments are notes that browsers always skip over and never
+  display — they are just notes for whoever is editing this file.
+
+  THE MOST COMMON EDITS, AND WHERE TO FIND THEM:
+
+  1. Change service times or the address
+     -> Search for "SERVICES & LOCATIONS" below
+
+  2. Change the welcome message / homepage headline
+     -> Search for "HERO SECTION" below
+
+  3. Update the sermon player
+     -> It should already update itself automatically — it pulls
+        live from SermonAudio.com and doesn't need editing.
+
+  4. Change a color (e.g. the gold accent color)
+     -> Search for ":root" near the top of the <style> section.
+        Colors are defined once there by name (like --gold) and
+        used everywhere else in the page. Change it once, it
+        updates everywhere.
+
+  5. Swap the logo or photo
+     -> Search for "grbc-logo.png" or "src=" and replace the
+        filename with your new image's filename. Make sure the
+        new image file sits in the same folder as this HTML file.
+
+  6. Change any text on the page
+     -> Just find the sentence you want to change (Ctrl+F / Cmd+F
+        to search for a few words from it) and type over it,
+        staying between the same < > tags on either side.
+
+  IF SOMETHING BREAKS
+  Undo your last change first (Ctrl+Z in most editors before
+  saving), or keep a backup copy of this file before editing, so
+  you can always go back to a known-working version.
+  ============================================================
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grace Reformed Baptist Church</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  /* COLORS. Every color on the page is defined once here, then used
+     everywhere else by name (like var(--gold)). Change a value here
+     and it updates across the entire page automatically. */
+  :root {
+    --black: #1c130d;    /* main dark background color */
+    --black-2: #241a12;  /* slightly different dark shade, used for some text */
+    --gold: #c9a84c;     /* main accent color (buttons, lines, icons) */
+    --gold-soft: #e2c98a; /* lighter gold, used for some headings */
+    --ivory: #f2ede1;    /* light background color (Services & Locations section) */
+    --line: rgba(201,168,76,0.35); /* faint gold used for thin divider lines */
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--black);
+    color: var(--ivory);
+    font-family: 'EB Garamond', Georgia, serif;
+    line-height: 1.6;
+  }
+  a { color: inherit; text-decoration: none; }
+  h1, h2, h3, .display { font-family: 'Cinzel', serif; letter-spacing: 1px; }
+
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px 6%;
+    border-bottom: 1px solid var(--line);
+  }
+  .crest-mini { display: flex; align-items: center; gap: 12px; }
+  .crest-mini .glyph {
+    width: 40px; height: 40px;
+    border: 1.5px solid var(--gold);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gold);
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .crest-mini .name {
+    font-family: 'Cinzel', serif;
+    font-size: 14px;
+    letter-spacing: 2px;
+    color: var(--gold-soft);
+  }
+  nav { display: flex; gap: 40px; font-size: 14px; letter-spacing: 1.5px; text-transform: uppercase; }
+  nav a { color: var(--ivory); border-bottom: 1px solid transparent; padding-bottom: 4px; }
+  nav a.active, nav a:hover { border-bottom-color: var(--gold); color: var(--gold-soft); }
+
+  .hero {
+    text-align: center;
+    padding: 100px 6% 80px;
+    position: relative;
+  }
+  .crest-big {
+    width: 90px; height: 90px;
+    margin: 0 auto 30px;
+    border: 1.5px solid var(--gold);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: 26px;
+    color: var(--gold);
+    position: relative;
+  }
+  .crest-big::before {
+    content: '';
+    position: absolute;
+    top: -14px; left: 50%;
+    transform: translateX(-50%);
+    width: 0; height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 14px solid var(--gold);
+  }
+  .hero .eyebrow {
+    letter-spacing: 4px;
+    font-size: 12px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 18px;
+  }
+  .hero h1 {
+    font-size: clamp(30px, 5vw, 52px);
+    font-weight: 500;
+    color: var(--gold-soft);
+    margin: 0 0 8px;
+    line-height: 1.25;
+  }
+  .hero .psalm {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: rgba(242,237,225,0.6);
+    letter-spacing: 1px;
+    margin-bottom: 44px;
+  }
+  .hero-buttons { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+  .btn {
+    border: 1px solid var(--gold);
+    color: var(--gold-soft);
+    padding: 14px 34px;
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: all .2s ease;
+  }
+  .btn:hover { background: var(--gold); color: var(--black); }
+  .btn.filled { background: var(--gold); color: var(--black); }
+  .btn.filled:hover { background: var(--gold-soft); }
+
+  .horizon {
+    max-width: 200px;
+    margin: 70px auto;
+    border: none;
+    border-top: 1px solid var(--gold);
+    opacity: 0.5;
+  }
+
+  .sermon-section { text-align: center; padding: 0 6% 90px; }
+  .sermon-section .label {
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+  .sermon-embed { max-width: 820px; margin: 0 auto; border: 1px solid var(--line); }
+  .sermon-embed iframe { width: 100%; height: 150px; border: none; display: block; }
+
+  .lower {
+    background: var(--ivory);
+    color: var(--black-2);
+    padding: 90px 6%;
+  }
+  .lower-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 70px;
+    max-width: 1150px;
+    margin: 0 auto;
+  }
+  .lower h2 {
+    font-size: 30px;
+    color: var(--black-2);
+    margin: 0 0 6px;
+    font-weight: 500;
+  }
+  .lower .label-dark {
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: #8a6d2f;
+    margin-bottom: 22px;
+  }
+  .confession-text {
+    font-style: italic;
+    font-size: 17px;
+    color: #2a241a;
+  }
+  .citation { margin-top: 18px; font-size: 13px; color: #7a7263; }
+  .services-box {
+    border-left: 1px solid #c9a84c;
+    padding-left: 40px;
+  }
+  .service-line {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 16px 0;
+    font-size: 17px;
+  }
+  .service-line i { color: #8a6d2f; width: 18px; }
+
+  .assoc {
+    background: var(--black);
+    text-align: center;
+    padding: 70px 6%;
+    border-top: 1px solid var(--line);
+  }
+  .about-heading {
+    font-size: clamp(26px, 3.5vw, 38px);
+    font-weight: 500;
+    color: var(--gold-soft);
+    margin: 0;
+  }
+  .assoc-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 50px;
+    max-width: 1000px;
+    margin: 40px auto 0;
+    text-align: left;
+  }
+  .assoc-grid .item {
+    border-top: 1px solid var(--line);
+    padding-top: 20px;
+    text-align: center;
+  }
+  .assoc-grid .num {
+    font-family: 'Cinzel', serif;
+    color: var(--gold);
+    font-size: 20px;
+    margin-bottom: 14px;
+    display: block;
+  }
+  .assoc-grid h3 { font-size: 17px; color: var(--gold-soft); margin: 0 0 10px; font-weight: 500; }
+  .assoc-grid p { font-size: 15px; color: rgba(242,237,225,0.75); margin: 0 0 14px; }
+  .learn-more { color: var(--gold); font-size: 13px; letter-spacing: .5px; border-bottom: 1px solid var(--gold); padding-bottom: 2px; }
+
+  footer {
+    text-align: center;
+    padding: 40px 20px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: rgba(242,237,225,0.4);
+    border-top: 1px solid var(--line);
+  }
+
+  @media (max-width: 800px) {
+    nav { gap: 20px; flex-wrap: wrap; }
+    .lower-grid { grid-template-columns: 1fr; }
+    .services-box { border-left: none; border-top: 1px solid #c9a84c; padding-left: 0; padding-top: 30px; }
+    .assoc-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER / LOGO / TOP NAVIGATION ============ -->
+<header>
+  <!-- LOGO (small header version). Currently plain text as a placeholder.
+       To use the real crest image instead, replace the two lines below with:
+       <img src="grbc-logo.png" style="height: 45px;">
+       (keep the .name div below it if you still want the text next to it) -->
+  <div class="crest-mini">
+    <div class="glyph">GR<br>BC</div>
+    <div class="name">GRACE REFORMED<br>BAPTIST CHURCH</div>
+  </div>
+  <!-- TOP NAVIGATION LINKS. Each line below is one menu item.
+       The text between > and < is what shows on screen.
+       The part in quotes after href= is which page it links to. -->
+  <nav>
+    <a href="#" class="active">Home</a>
+    <a href="about.html">About</a>
+    <a href="what-we-believe.html">What We Believe</a>
+    <a href="sermons.html">Sermons</a>
+  </nav>
+</header>
+
+<!-- ============ HERO SECTION (welcome headline + buttons) ============ -->
+<section class="hero">
+  <!-- LOGO (large hero version). Same placeholder as the header logo above.
+       To use the real crest image instead, replace the line below with:
+       <img src="grbc-logo.png" class="crest-big" style="border:none; background:none; width:140px; height:auto;"> -->
+  <div class="crest-big">GRBC</div>
+  <div class="eyebrow">Grace Reformed Baptist Church — Quartz Hill, California</div>
+  <!-- MAIN HEADLINE. Change the words between <h1> and </h1> to change
+       the big welcome message. <br> forces a line break at that spot. -->
+  <h1>Come worship the King,<br>all glorious above.</h1>
+  <div class="psalm">Psalm 145:10</div>
+  <!-- DIRECTIONS & SERMONS BUTTONS.
+       The text after href=" is the link. The words between > and </a>
+       are what shows on the button itself. -->
+  <div class="hero-buttons">
+    <a class="btn filled" href="https://maps.app.goo.gl/MpgQhvEPL4PLxEbz9" target="_blank">Directions</a>
+    <a class="btn" href="sermons.html">Sermons</a>
+  </div>
+</section>
+
+<hr class="horizon">
+
+<!-- ============ SERMON PLAYER (auto-updates from SermonAudio.com, no editing needed) ============ -->
+<section class="sermon-section">
+  <div class="label">Listen to the Latest Sermon</div>
+  <!-- SERMON PLAYER. This box automatically pulls the newest sermon from
+       SermonAudio.com — it is not something you need to update by hand.
+       Do not edit the link inside src=" unless the church's SermonAudio
+       broadcaster ID ever changes (currently "grbc1689"). -->
+  <div class="sermon-embed">
+    <iframe src="https://embed.sermonaudio.com/player/a/broadcaster/grbc1689/?background=false" scrolling="no"></iframe>
+  </div>
+</section>
+
+<!-- ============ SERVICES & LOCATIONS (confession text, worship times, address) ============ -->
+<section class="lower">
+  <div class="lower-grid">
+    <div>
+      <h2>Services &amp; Locations</h2>
+      <div class="label-dark">LORD'S DAY WORSHIP</div>
+      <!-- CONFESSION QUOTE. This is a historical document excerpt
+           (Second London Confession) — only change it if the quote
+           itself needs correcting, not for routine updates. -->
+      <p class="confession-text">
+        As it is the law of nature, that in general a proportion of time, by God's appointment, be set apart for
+        the worship of God, so by his Word, in a positive moral, and perpetual commandment, binding all men, in
+        all ages, he has particularly appointed one day in seven for a sabbath to be kept holy unto him, which
+        from the beginning of the world to the resurrection of Christ was the last day of the week, and from the
+        resurrection of Christ was changed into the first day of the week, which is called the Lord's Day: and is
+        to be continued to the end of the world as the Christian Sabbath, the observation of the last day of the
+        week being abolished.
+      </p>
+      <div class="citation">— Second London Confession of Faith, 22.7</div>
+    </div>
+    <!-- SERVICE TIMES & ADDRESS. This is the section you'll edit most
+         often. Change the times/address text directly; the little
+         clock/pin symbols are icons and don't need to be touched. -->
+    <div class="services-box">
+      <div class="label-dark">SUNDAY WORSHIP SERVICES</div>
+      <div class="service-line"><i class="fa-solid fa-clock"></i> 11:00 AM — Morning Worship</div>
+      <div class="service-line"><i class="fa-solid fa-clock"></i> 1:30 PM (Approx.) — Afternoon Worship</div>
+      <div class="service-line"><i class="fa-solid fa-location-dot"></i> 42217 55th Street W, Quartz Hill, CA 93536</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT US (Our Church / Our Confession / Our Association) ============ -->
+<section class="assoc">
+  <h2 class="about-heading">About the Church</h2>
+  <!-- THREE INFO CARDS BELOW: Our Church / Our Confession / Our Association.
+       Each card has the same structure: an icon, a heading, a short
+       paragraph, and a "Learn more" link. To change which icon shows,
+       swap the fa-solid fa-___ class name for a different one from
+       fontawesome.com/icons (free icon search). -->
+  <div class="assoc-grid">
+    <div class="item">
+      <span class="num"><i class="fa-solid fa-church"></i></span>
+      <h3>Our Church</h3>
+      <p>Grace Reformed Baptist Church was constituted in 2012 in the Antelope Valley.</p>
+      <a class="learn-more" href="about.html">Learn more →</a>
+    </div>
+    <div class="item">
+      <span class="num"><i class="fa-solid fa-book-open"></i></span>
+      <h3>Our Confession</h3>
+      <p>Our full doctrinal commitments are contained in The Second London Confession of Faith.</p>
+      <a class="learn-more" href="what-we-believe.html">Learn more →</a>
+    </div>
+    <div class="item">
+      <span class="num"><i class="fa-solid fa-handshake"></i></span>
+      <h3>Our Association</h3>
+      <p>Grace Reformed Baptist Church is part of the Southern California Association of Reformed Baptist Churches.</p>
+      <a class="learn-more" href="about.html">Learn more →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  Grace Reformed Baptist Church &nbsp;·&nbsp; Quartz Hill, California &nbsp;·&nbsp; © 2026
+</footer>
+
+</body>
+</html>
