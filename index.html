@@ -109,7 +109,7 @@
 
   .hero {
     text-align: center;
-    padding: 100px 6% 80px;
+    padding: 100px 6% 40px;
     position: relative;
   }
   .crest-big {
@@ -185,10 +185,35 @@
 
   .horizon {
     max-width: 200px;
-    margin: 70px auto;
+    margin: 40px auto;
     border: none;
     border-top: 1px solid var(--gold);
     opacity: 0.5;
+  }
+
+  /* MISSION STATEMENT SECTION. Sits between the hero and the sermon
+     player. Same text also appears on about.html on purpose — a
+     visitor might land on either page first, so the mission shows
+     up wherever they arrive. */
+  .mission-section {
+    text-align: center;
+    padding: 0 6% 10px;
+    max-width: 820px;
+    margin: 0 auto;
+  }
+  .mission-section .eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+  .mission-section p {
+    font-size: 19px;
+    line-height: 1.7;
+    color: var(--gold-soft);
+    margin: 0;
   }
 
   .sermon-section { text-align: center; padding: 0 6% 90px; }
@@ -469,6 +494,20 @@
 </section>
 
 <hr class="horizon">
+
+<!-- ============ MISSION STATEMENT ============ -->
+<!-- Same wording as the intro paragraph on about.html — kept
+     identical on purpose so it reads the same everywhere it
+     appears. If you update the wording here, update it on
+     about.html too so the two pages stay consistent. -->
+<section class="mission-section">
+  <div class="eyebrow">Our Mission</div>
+  <p>
+    We are a group of believers in Christ in the growing Antelope Valley. Our aim is to give glory to the
+    Triune God in public worship, to proclaim the gospel of Jesus Christ, and to teach those who profess
+    faith to observe all that Christ has commanded.
+  </p>
+</section>
 
 <!-- ============ SERMON PLAYER (auto-updates from SermonAudio.com, no editing needed) ============ -->
 <section class="sermon-section">
